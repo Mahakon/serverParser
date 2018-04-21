@@ -1,0 +1,24 @@
+{
+  "name": "parserserver",
+  "version": "1.0.0",
+  "description": "for parsing repos from bitbucket",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://Mahakon@bitbucket.org/Mahakon/parserserver.git"
+  },
+  "author": "Mahakon",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/Mahakon/parserserver#readme",
+  "dependencies": {
+    "async": "^2.6.0",
+    "hapi": "^17.3.1",
+    "hapi-pino": "^4.0.4",
+    "node-fetch": "^2.1.2",
+    "nodemon": "^1.17.3"
+  }
+}
