@@ -2,7 +2,7 @@ const Hapi = require('hapi');
 const fetch = require('node-fetch');
 
 const server = Hapi.server({
-  host:'localhost',
+  host:'127.0.0.1',
   port:3001
 });
 
