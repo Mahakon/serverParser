@@ -50,6 +50,7 @@ server.route({
       .then(ans => ans.json())
       .then(
         comments => {
+          console.log('comments' + '\n')
           console.log(comments);
           userComments = comments;
         },
@@ -67,6 +68,8 @@ server.route({
       return false;
     });
 
+    console.log('userComments' + '\n' + userComments);
+
     userComments = userComments.map(comment => {
       return {
         discription: comment.content.replace(/TODO|PROCESS|DONE/, '') +
@@ -76,10 +79,14 @@ server.route({
       }
     });
 
-    if (request.query.tasks !== undefined) {
-      let previousTasks = JSON.parse(request.query.tasks);
-      console.log(userComments);
-      console.log(previousTasks);
+
+
+    let previousTasks = JSON.parse(request.query.tasks);
+
+    if (previousTasks !== []) {
+      console.log(previousTasks)
+      //console.log(userComments);
+      //console.log(previousTasks);
       userComments = userComments.filter(comment => {
         return !previousTasks.some(el => {
           if (el.filename_hash === comment.commentHash &&
