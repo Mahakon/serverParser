@@ -73,6 +73,7 @@ server.route({
     if (notUserRepError !== undefined) {
       return notUserRepError;
     }
+    console.log('here!!!' + userComments)
     if (userComments === undefined) {
       return [];
     }
