@@ -51,7 +51,7 @@ server.route({
       .then(
         ans => {
           try {
-            ans.json()
+            return ans.json()
           } catch(err) {
             return new Error('not valid user')
           }
