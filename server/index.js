@@ -38,6 +38,7 @@ server.route({
     node = await getNode(url);
 
     console.log(node);
+    let notUserRepError;
 
     url = `https://api.bitbucket.org/1.0/repositories/` +
                   `${request.query.acountname}/` +
@@ -47,17 +48,34 @@ server.route({
                   `comments?` +
                   `access_token=${request.query.access_token}`;
     await fetch(url)
-      .then(ans => ans.json())
+      .then(
+        ans => {
+          try {
+            ans.json()
+          } catch(err) {
+            return new Error('not valid user')
+          }
+        }
+      )
       .then(
         comments => {
-          console.log('comments' + '\n')
+          console.log('comments' + '\n');
           console.log(comments);
           userComments = comments;
         },
         err => {
           console.log(err);
+          notUserRepError = err;
         }
       );
+
+    console.log('ms' + notUserRepError)
+    if (notUserRepError !== undefined) {
+      return notUserRepError;
+    }
+    if (userComments === undefined) {
+      return [];
+    }
 
     userComments = userComments.filter(comment => {
       if (comment.content.includes('TODO') ||
