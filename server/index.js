@@ -38,7 +38,6 @@ server.route({
     node = await getNode(url);
 
     console.log(node);
-    let notUserRepError;
 
     url = `https://api.bitbucket.org/1.0/repositories/` +
                   `${request.query.acountname}/` +
@@ -61,21 +60,17 @@ server.route({
         comments => {
           console.log('comments' + '\n');
           console.log(comments);
-          userComments = comments;
+          if (comments.type !== 'error') {
+            userComments = comments;
+          }
         },
         err => {
           console.log(err);
-          notUserRepError = err;
         }
       );
 
-    console.log('ms' + notUserRepError)
-    if (notUserRepError !== undefined) {
-      return notUserRepError;
-    }
-    console.log('here!!!' + userComments)
-    if (userComments === undefined) {
-      return [];
+    if (userComments === []) {
+      return userComments;
     }
 
     userComments = userComments.filter(comment => {
